@@ -70,7 +70,7 @@ async function searchMovie() {
         document.querySelector('.popular-people').style.display = 'none';
     } else {
         const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = `<p>Tidak ditemukan movie dengan nama ${searchTerm}</p>`;
+        resultDiv.innerHTML = `<p>No movies found with the name ${searchTerm}</p>`;
     }
 }
 
@@ -112,7 +112,7 @@ async function fetchMovieDetails() {
     const movieId = urlParams.get('id');
 
     if (!movieId) {
-        document.body.innerHTML = '<p>ID movie tidak ditemukan di URL.</p>';
+        document.body.innerHTML = '<p>Movie ID not found in the URL.</p>';
         return;
     }
 
@@ -128,7 +128,7 @@ async function fetchMovieReviews() {
     const urlParams = new URLSearchParams(window.location.search);
     const movieId = urlParams.get('id');
     if (!movieId) {
-        document.body.innerHTML = '<p>ID movie tidak ditemukan di URL.</p>';
+        document.body.innerHTML = '<p>Movie ID not found in the URL.</p>';
         return;
     }
 
@@ -175,7 +175,7 @@ function addScrollButtons() {
 function displayMovies(movies, title) {
     const resultDiv = document.getElementById('result');
     if (!movies || movies.length === 0) {
-        resultDiv.innerHTML = '<p>Data movie tidak ditemukan.</p>';
+        resultDiv.innerHTML = '<p>No movie data found.</p>';
         return;
     }
 
@@ -220,7 +220,7 @@ function displayMovieDetail(movie) {
 function displayPopularPeople(people) {
     const resultDiv = document.getElementById('result-people');
     if (!people || people.length === 0) {
-        resultDiv.innerHTML = '<p>Data popular people tidak ditemukan.</p>';
+        resultDiv.innerHTML = '<p>Popular people data not found.</p>';
         return;
     }
     let html = '<h2>Popular People</h2>';
@@ -243,7 +243,7 @@ function displayPopularPeople(people) {
 function displayReviewDetail(reviews) {
     const reviewDiv = document.getElementById('movie-review');
     if (!reviews || reviews.results.length === 0) {
-        reviewDiv.innerHTML = '<p>Tidak ada review untuk movie ini.</p>';
+        reviewDiv.innerHTML = '<p>There are no reviews for this movie.</p>';
         return;
     }
 
