@@ -35,7 +35,7 @@ async function fetchAllMovie() {
     const data = await fetchAPI(url, 'loading', 'result');
 
     if (data && data.results) {
-        displayMovies(data.results, 'Popular Movies');
+        displayMovies(data.results, 'Popular Movies', 'result');
     }
 }
 
@@ -66,7 +66,7 @@ async function searchMovie() {
     if (data && data.results) {
         // window.location.href = href;
         console.log(data);
-        displayMovies(data.results, `Hasil Pencarian: ${searchTerm}`);
+        displayMovies(data.results, `Hasil Pencarian: ${searchTerm}`, 'result');
         document.querySelector('.popular-people').style.display = 'none';
     } else {
         const resultDiv = document.getElementById('result');
@@ -103,7 +103,7 @@ async function applyFilter() {
 
     const data = await fetchAPI(url, 'loading', 'result');
     if (data && data.results) {
-        displayMovies(data.results, `Kategori: ${filter.replace('_', ' ').toUpperCase()}`);
+        displayMovies(data.results, `Kategori: ${filter.replace('_', ' ').toUpperCase()}`, 'result');
     }
 }
 
@@ -141,6 +141,16 @@ async function fetchMovieReviews() {
     }
 }
 
+async function fetchTrendingMovies() {
+    const url = `${BASE_URL}trending/movie/week?api_key=${API_KEY_PUBLIC}`;
+    const data = await fetchAPI(url, 'loading-trending', 'result-trending');
+    console.log(url);
+
+    if (data && data.results) {
+        displayMovies(data.results, 'Trending Movies', 'result-trending');
+    }
+}
+
 function handleEnter(event) {
     if (event.key === 'Enter') {
         searchMovie();
@@ -152,28 +162,29 @@ function resetFilter() {
     fetchAllMovie();
 }
 
-function addScrollButtons() {
-    const resultDiv = document.getElementById('result');
+function addScrollButtons(resultDivId = 'result') {
+    console.log('Adding scroll buttons to', resultDivId);
+    const resultDiv = document.getElementById(resultDivId);
     const movieList = resultDiv.querySelector('.movie-list');
     if (!movieList) return;
 
     const leftBtn = document.createElement('button');
     leftBtn.innerHTML = '<span class="material-symbols-outlined">chevron_left</span>';
     leftBtn.className = 'scroll-btn scroll-left';
-    leftBtn.onclick = () => movieList.scrollBy({ left: -400, behavior: 'smooth' });
+    leftBtn.onclick = () => movieList.scrollBy({ left: -300, behavior: 'smooth' });
 
     const rightBtn = document.createElement('button');
     rightBtn.innerHTML = '<span class="material-symbols-outlined">chevron_right</span>';
     rightBtn.className = 'scroll-btn scroll-right';
-    rightBtn.onclick = () => movieList.scrollBy({ left: 400, behavior: 'smooth' });
+    rightBtn.onclick = () => movieList.scrollBy({ left: 300, behavior: 'smooth' });
 
     resultDiv.appendChild(leftBtn);
     resultDiv.appendChild(rightBtn);
 }
 
 // panggil setelah menampilkan film
-function displayMovies(movies, title) {
-    const resultDiv = document.getElementById('result');
+function displayMovies(movies, title, resultDivId = 'result') {
+    const resultDiv = document.getElementById(resultDivId);
     if (!movies || movies.length === 0) {
         resultDiv.innerHTML = '<p>No movie data found.</p>';
         return;
@@ -197,8 +208,8 @@ function displayMovies(movies, title) {
     });
     html += '</div>';
     resultDiv.innerHTML = html;
-
-    addScrollButtons();
+    
+    addScrollButtons(resultDivId);
 }
 
 function displayMovieDetail(movie) {

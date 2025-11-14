@@ -17,8 +17,13 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
-        .popular-movies h2 {
+        h2 {
             font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        section > div > p {
+            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -66,6 +71,11 @@
             <div id="loading">Loading data...</div>
             <div id="result"></div>
         </section>
+
+        <section class="trending-movies">
+            <div id="loading-trending">Loading data...</div>
+            <div id="result-trending"></div>
+        </section>
     
         <section class="popular-people">
             <div id="loading-people">Loading data...</div>
@@ -107,6 +117,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             fetchAllMovie();
             fetchPopularPeople();
+            fetchTrendingMovies();
             applyFilter();
         });
     </script>
