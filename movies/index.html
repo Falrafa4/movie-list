@@ -24,6 +24,10 @@
             gap: 15px;
         }
 
+        .movie-detail-container img {
+            border-radius: 10px;
+        }
+
         .movie-info h2 {
             font-size: 3rem;
         }
@@ -32,18 +36,12 @@
             margin-top: 3rem;
         }
 
-        #movie-review {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
         .back-link {
             display: flex;
             align-items: center;
             margin: 1rem 0;
             text-decoration: none;
-            color: #0C2B4E;
+            color: #CCCCCC;
             gap: 0.5rem;
             width: fit-content;
         }
@@ -51,6 +49,49 @@
         .back-link:hover .text-link {
             text-decoration: underline;
         }
+
+        #movie-review {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .review-card {
+            background: rgba(0, 0, 0, 0.55);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 14px;
+            backdrop-filter: blur(4px);
+            line-height: 1.7;
+            width: fit-content;
+        }
+
+        .review-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .review-card p {
+            max-width: 75ch;
+            /* ideal reading width */
+        }
+
+        .read-more-btn {
+            margin-top: 12px;
+            padding: 7px 14px;
+            border: none;
+            border-radius: 8px;
+            background: #f4f4f4;
+            cursor: pointer;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .read-more-btn:hover {
+            opacity: .8;
+        }
+
 
         @media (max-width: 768px) {
             main a {

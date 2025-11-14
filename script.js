@@ -64,7 +64,7 @@ async function searchMovie() {
     const data = await fetchAPI(url, 'loading', 'result');
 
     if (data && data.results) {
-        // window.location.href = href;
+        window.location.href = '#';
         console.log(data);
         displayMovies(data.results, `Hasil Pencarian: ${searchTerm}`, 'result');
         document.querySelector('.popular-people').style.display = 'none';
@@ -121,6 +121,11 @@ async function fetchMovieDetails() {
 
     if (data) {
         displayMovieDetail(data);
+        document.getElementsByTagName('main')[0].style.background = `
+            linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+            url('https://image.tmdb.org/t/p/original${data.backdrop_path}')
+            no-repeat center center/cover fixed
+        `;
     }
 }
 
@@ -197,7 +202,9 @@ function displayMovies(movies, title, resultDivId = 'result') {
     movies.forEach(movie => {
         html += `
             <a href='movies/?id=${movie.id}' class="movie-card">
-                <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.original_title} Poster">
+                <div>
+                    <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.original_title} Poster">
+                </div>
                 <div class="movie-info">
                     <h3>${movie.title}</h3>
                     <p><strong>Rating:</strong> ${movie.vote_average}</p>
@@ -251,6 +258,27 @@ function displayPopularPeople(people) {
     resultDiv.innerHTML = html;
 }
 
+// function displayReviewDetail(reviews) {
+//     const reviewDiv = document.getElementById('movie-review');
+//     if (!reviews || reviews.results.length === 0) {
+//         reviewDiv.innerHTML = '<p>There are no reviews for this movie.</p>';
+//         return;
+//     }
+
+//     console.log(reviews);
+
+//     let html = '';
+//     reviews.results.forEach(review => {
+//         html += `
+//             <div class="review-card">
+//                 <h3>Author: ${review.author}</h3>
+//                 <p>${review.content}</p>
+//             </div>
+//         `;
+//     });
+//     reviewDiv.innerHTML = html;
+// }
+
 function displayReviewDetail(reviews) {
     const reviewDiv = document.getElementById('movie-review');
     if (!reviews || reviews.results.length === 0) {
@@ -258,16 +286,34 @@ function displayReviewDetail(reviews) {
         return;
     }
 
-    console.log(reviews);
-
     let html = '';
     reviews.results.forEach(review => {
+
+        // Potong konten jadi 350 karakter
+        const shortText = review.content.length > 350 
+            ? review.content.slice(0, 350) + '...' 
+            : review.content;
+
         html += `
             <div class="review-card">
-                <h3>Author: ${review.author}</h3>
-                <p>${review.content}</p>
+                <h3>${review.author}</h3>
+                <p class="review-text">${shortText}</p>
+
+                ${review.content.length > 350 
+                    ? `<button class="read-more-btn" data-full="${encodeURIComponent(review.content)}">Read more</button>`
+                    : ''
+                }
             </div>
         `;
     });
     reviewDiv.innerHTML = html;
+
+    // Event: buka full text
+    document.querySelectorAll('.read-more-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const full = decodeURIComponent(this.getAttribute('data-full'));
+            this.previousElementSibling.textContent = full;
+            this.remove(); // hilangkan tombol setelah diklik
+        });
+    });
 }

@@ -29,8 +29,8 @@ html {
 }
 
 body {
-    background-color: #F4F4F4;
-    color: #0C2B4E;
+    background-color: #0A0F1F;
+    color: #CCCCCC;
     overflow-x: hidden;
 }
 
@@ -40,7 +40,7 @@ main {
 
 /* === Navbar === */
 nav {
-    background-color: #1A3D64;
+    background-color: #111827;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -55,7 +55,7 @@ nav {
 .logo {
     font-size: 2rem;
     font-weight: 700;
-    color: #F4F4F4;
+    color: #CCCCCC;
     letter-spacing: 1px;
 }
 
@@ -64,8 +64,8 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #F4F4F4;
-    border: 2px solid #1D546C;
+    background-color: #0A0F1F;
+    border: 1px solid #121a33;
     border-radius: 50px;
     padding: 0.5rem 1rem;
     width: 600px;
@@ -78,7 +78,16 @@ nav {
     outline: none;
     font-size: 0.8rem;
     background: transparent;
-    color: #0C2B4E;
+    color: #CCCCCC;
+}
+
+
+.search-box input:-webkit-autofill,
+.search-box input:-webkit-autofill:hover,
+.search-box input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #0A0F1F inset !important;
+  -webkit-text-fill-color: #fff !important;
+  transition: background-color 9999s ease-in-out 0s;
 }
 
 .search-box button {
@@ -103,7 +112,7 @@ nav {
 
 /* === Dropdown Filter === */
 .filter-dropdown {
-    background-color: #F4F4F4;
+    background-color: #CCCCCC;
     color: #0C2B4E;
     border: 2px solid #1D546C;
     border-radius: 8px;
@@ -150,8 +159,8 @@ nav {
 
 /* === Movie Card === */
 .movie-card {
-    background-color: #F4F4F4;
-    color: #1A3D64;
+    background-color: #111827;
+    color: #CCCCCC;
     border-radius: 10px;
     overflow: hidden;
     width: 15rem;
@@ -159,15 +168,26 @@ nav {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
+/* 
 .movie-card:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 20px rgba(119, 119, 119, 0.2);
+} */
+
+.movie-card:hover img {
+    transform: scale(1.05);
+}
+
+.movie-card div {
+    width: 100%;
+    height: 60%;
+    overflow: hidden;
 }
 
 .movie-card img {
     width: 100%;
-    height: 60%;
+    height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
 .movie-info {
@@ -186,7 +206,7 @@ nav {
     top: 50%;
     /* transform: translateY(-50%); */
     background-color: rgba(26, 61, 100, 0.7);
-    color: #F4F4F4;
+    color: #CCCCCC;
     border: none;
     border-radius: 50%;
     width: 35px;
@@ -240,10 +260,10 @@ nav {
 
 /* Footer */
 footer {
-    background-color: #1A3D64;
-    color: #F4F4F4;
+    border-top: 1px solid rgb(23, 34, 67);
+    background-color: #0A0F1F;
+    color: #CCCCCC;
     padding: 5rem 8rem 2rem 8rem;
-    margin-top: 2rem;
 }
 
 footer h3 {
